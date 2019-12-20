@@ -1,0 +1,112 @@
+﻿@model IEnumerable<TOUR_REGISTER_VIEW>
+
+@if (Model != null)
+{
+    decimal? totolPay = 0;
+    var t = Model.GroupBy(x => x.TH_EVENT_NAME).Select(y => new { y.Key });
+    foreach (var i in t)
+    {
+        <div class="row">
+            <div class="col-md-12" style="padding:40px;">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h3>ประเภท @(i.Key)</h3>
+                    </div>
+                </div>
+                @{
+                    var q = (from x in Model where x.TH_EVENT_NAME == i.Key select x).ToList();
+                    var s = q.GroupBy(x => x.TEAM_REF).Select(y => new { y.Key });
+                    var k = 0;
+
+                    foreach (var l in s)
+                    {
+                        var u = (from x in Model where x.TEAM_REF == l.Key select x).ToList();
+                        k = k + 1;
+                        <div class="row">
+                            @if (u.Count > 2)
+                            {
+                                <div class="col-md-2">
+                                    <h4>ทีมที่ @(k) </h4>
+                                </div>
+                                <div class="col-md-4">
+                                    <h4>ชื่อทีม @u.FirstOrDefault().GROUP_NAME</h4>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-md-2">
+                                    <h4>คู่ที่ @(k)</h4>
+                                </div>
+                            }
+
+                            @if (u.FirstOrDefault().EXPRIE_B)
+                            {
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-danger" onclick="dlTeam('@u.FirstOrDefault().TEAM_REF')">ลบ</button>
+                                </div>
+                            }
+                            else if (Session["Login"] != null && (bool)Session["Login"])
+                            {
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-danger" onclick="dlTeam('@u.FirstOrDefault().TEAM_REF')">ลบ</button>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table id="tbPlayer" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>รหัส</th>
+                                            <th>ชื่อ-นามสกุล</th>
+                                            <th>เพศ</th>
+                                            <th>ปีเกิด</th>
+                                            <th>อายุ</th>
+                                            <th>อันดับ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="background-color:white;">
+                                        @foreach (var j in u)
+                                        {
+                                            <tr>
+                                                <td>@j.ID</td>
+                                                <td style="text-align:left">@j.FIRST_NAME @j.LAST_NAME</td>
+                                                <td>@j.GENDER_DESC</td>
+                                                <td>@j.BIRTH_YEAR_STR</td>
+                                                <td>@j.AGE</td>
+                                                <td>@j.RANK</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                    <tfoot style="background-color: #f9f992;">
+                                        <tr>
+                                            <td colspan="4" style="text-align:center">จำนวนเงิน</td>
+                                            @{
+                                                totolPay = totolPay + u.FirstOrDefault().PAY;
+                                            }
+                                            <td colspan="1">@string.Format("{0:#,###,##0.00}", u.FirstOrDefault().PAY)</td>
+                                            <td></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <br />
+                        <hr />
+                    }
+                }
+
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-12" align="center" style="padding:10px;">
+            <div style="background-color:yellow;padding:10px;border-radius:10px;">
+                @{
+                    <p style="font-size:20px;">รวมค่าสมัคร : <b>@string.Format("{0:#,###,##0.00}", totolPay) </b></p>
+                }
+            </div>
+        </div>
+    </div>
+}

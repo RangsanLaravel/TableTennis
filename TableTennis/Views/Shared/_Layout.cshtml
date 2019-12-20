@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    
+</head>
+<body style="padding-bottom:0;">
+    <div class="content">
+        <div class="navbar @*navbar-default*@ navbar-fixed-top" style="background-color: rgb(64, 80, 77);">
+            <div class="">
+                <div class="navbar-header">
+                    @Html.ActionLink("สมาคมกีฬาเทเบิลเทนนิสแห่งประเทศไทย", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", @style = "color:white;" })
+                    @Html.ActionLink("ทัวร์นาเมนต์", "Index", "Home", new { area = "" }, new { @class = "navbar-brand nav-cus", @style = "color:white;", @title = "ทัวร์นาเมนต์" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        @Html.Partial("_User")
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container @*body-content*@">
+        <br />
+        <hr />
+        @RenderBody()
+        <br />
+        <hr />
+        <footer style="bottom: 0;">
+            @Html.Partial("_Footer")
+        </footer>
+    </div>
+    
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <link href="~/Content/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    @RenderSection("scripts", required: false)
+    @Html.Partial("~/Views/Shared/_Loading.cshtml")
+</body>
+</html>

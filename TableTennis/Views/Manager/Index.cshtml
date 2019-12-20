@@ -1,0 +1,157 @@
+﻿@model MANAGER
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .colorgraph {
+        height: 5px;
+        border-top: 0;
+        background: #c4e17f;
+        border-radius: 5px;
+        background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    }
+
+    label{
+        font-size:18px;
+    }
+    .mana {
+        color: #0606c1;
+    }
+</style>
+
+@if (Model != null)
+{
+<div class="row" style="background-color: whitesmoke;border-radius: 10px;">
+    <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-2 col-md-offset-3">
+        <div class="col-md-12">
+            <div class="row">
+                <h2>ตัวแทน <small>สมัครการแข่งขัน</small></h2>
+            </div>
+            <br />
+            <br />
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <label>ชื่อ - นามสกุล</label>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-8">
+                    <label class="mana">@Model.FIRST_NAME @Model.LAST_NAME</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <label>เพศ</label>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-8">
+                    @if (Model.GENDER == 'M')
+                    {
+                        <label class="mana">ชาย</label>
+                    }
+                    else
+                    {
+                        <label class="mana">หญิง</label>
+                    }
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <label>อีเมล</label>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-8">
+                    <label class="mana">@Model.EMAIL</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <label>หมายเลขโทรศัพท์</label>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-8">
+                    <label class="mana">@Model.PHONE</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <label>สังกัด</label>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-8">
+                    <label class="mana">@Model.TEAM</label>
+                </div>
+            </div>
+            <br />
+            <div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <a data-toggle="modal" data-target="#myModal">แก้ไข</a>
+                </div>
+            </div>
+            <br />
+            <br />
+        </div>
+    </div>
+ </div>
+ <!--modal-->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">แก้ไข</h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" method="post" action="@Url.Action("Update","Manager")">      
+                    <input type="hidden" name="ID" value="@Model.ID" />
+                    <hr class="colorgraph">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="FIRST_NAME" id="first_name" value="@Model.FIRST_NAME" class="form-control input-lg" placeholder="ชื่อ" tabindex="1" required>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="form-group">
+                                <input type="text" name="LAST_NAME" id="last_name" value="@Model.LAST_NAME" class="form-control input-lg" placeholder="นามสกุล" tabindex="2" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <input type="radio" name="GENDER" value="M" @if (Model.GENDER == null || Model.GENDER == 'M') { @( "checked") }> ชาย &nbsp;&nbsp;
+                            <input type="radio" name="GENDER" value="F" @if (Model.GENDER == 'F') { @( "checked") }> หญิง
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <input type="text" name="TEAM" id="team" value="@Model.TEAM" class="form-control input-lg" placeholder="ชื่อทีม หรือ องค์กร" tabindex="3" style="max-width:100%">
+                    </div>                    
+                    @if (!string.IsNullOrEmpty(ViewBag.exiteEmail))
+                    {
+                        <div>
+                            <p style="color:red;">@ViewBag.exiteEmail</p>
+                        </div>
+                        <br />
+                    }
+
+                    <div class="form-group">
+                        <input type="text" name="PHONE" id="phone" value="@Model.PHONE" class="form-control input-lg" placeholder="หมายเลขโทรศัพท์ หรือ เบอร์มือถือ" tabindex="5" style="max-width:300px;" required>
+                    </div>
+                    <div class="row">
+                    </div>
+
+                    <hr class="colorgraph">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6"><input type="submit" value="บันทึก" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+            </div>
+        </div>
+    </div>
+</div>
+    }
+
+
+

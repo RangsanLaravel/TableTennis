@@ -1,0 +1,118 @@
+﻿
+@{
+    ViewBag.Title = "Result";
+    Layout = "~/Views/Shared/PlayerLayout.cshtml";
+}
+
+<div class="row" style="background-color:#dedbdb;border-radius:10px">
+    <div class="col-xs-12 col-sm-8 col-md-10 col-sm-offset-2 col-md-offset-1">
+        <br />
+        <h1>รายชื่อนักกีฬา</h1>
+        <br />        
+        <div class="row">
+            <div class="col-md-2">
+                <label>รหัสนักกีฬา</label>
+                <div class="form-group">
+                    <input type="text" name="CODE" id="code" class="form-control" placeholder="รหัส" tabindex="1">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <label>ชื่อ-นามสกุล</label>
+                <div class="form-group">
+                    <input type="text" name="NAME" id="name" class="form-control" placeholder="ชื่อ-นามสกุล" tabindex="1">
+                </div>
+            </div>            
+            <div class="col-md-3">
+                <label>เพศ</label>
+                <div class="form-group">
+                    <select id="gender" class="form-control">
+                        <option value="" selected>ทั้งหมด</option>
+                        <option value="M">ชาย</option>
+                        <option value="F">หญิง</option>
+                    </select>
+                </div>
+            </div> 
+            <div class="col-md-1">
+                <br />                
+                <button type="button" class="btn btn-primary" id="srPly"> ค้นหา</button>
+            </div>
+            <div>
+                <br />                
+                <button type="button" class="btn btn-primary" id="btDowloand"> ดาวน์โหลด</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+                <table id="tbPlayer" class="table-bordered" style="border:1px;">
+                    <thead>
+                        <tr>
+                            <th style="text-align:center;">ลำดับ</th>
+                            <th style="text-align:center;">รหัส</th>
+                            <th style="text-align:center;">ชื่อ-นามสกุล</th>
+                            <th style="text-align:center;">เพศ</th>
+                            <th style="text-align:center;">ปีเกิด</th>
+                            <th style="text-align:center;">อายุ</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <br />
+                <br />
+                <br />
+                <br />
+
+            </div>
+        </div>
+    </div> 
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#srPly').on('click', function () {
+                getPlayer();
+            });
+
+            $('#btDowloand').on('click', function () {
+                getListPlayer();
+            });
+
+            getPlayer();
+        });
+
+        function getPlayer() {
+            $('.divLoading').show();
+            $('#tbPlayer').DataTable().destroy();
+            
+            var sr = {
+                CODE: $('#code').val(),
+                NAME: $('#name').val(),
+                GENDER: $('#gender :selected').val()
+            }
+            $('#tbPlayer tbody tr').remove();
+
+            $.ajax({
+                type:'POST',
+                url: '@Url.Action("GridResult", "Player")',
+                data: { param: sr },
+                success: function (response) {                    
+                    $('#tbPlayer tbody').append(response);  
+                    $('#tbPlayer').DataTable();
+                    $('.divLoading').hide();
+                        }
+                  });
+        }
+
+        function getListPlayer() {
+            window.open('http://119.59.117.150/TableTennis_Report/Reports/ListPlayer.aspx');
+        }
+    </script>
+
+}
+

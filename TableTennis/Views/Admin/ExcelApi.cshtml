@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "ExcelApi";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+@*<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>*@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sheetrock/1.1.4/dist/sheetrock.min.js"></script>
+<script src="https://rawgit.com/unconditional/jquery-table2excel/master/src/jquery.table2excel.js"></script>
+
+
+@*<link rel="stylesheet" type="text/css" href="http://fancyapps.com/fancybox/source/jquery.fancybox.css?v=2.0.5" media="screen" />*@
+
+<div id="main" class="container-fluid"  hidden="hidden">
+    <div class="row mainbox" >
+        <input type="hidden" id="hdGetUrl" name="name" value="@Url.Action("GetUrlActionUserManager", "Admin")" />    
+        <div class="col-xs-12 col-sm-12 col-md-12  detailbox">
+            <h2 class="col-all-center"> คะแนนการแข่งขัน </h2>
+            <hr class="colorgraph">
+            <div class="panel-group" id="accordion">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  ">
+                    @Html.Partial("~/Views/Admin/_ExcelApiSetting.cshtml")
+                    
+                    <div class="row">                    
+                        
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 databox">
+                            <input id="linksheet" type="text" placeholder="ใส่ลิ้ง" />
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                            <button type="button" class="btn btn-info col-xxs-mtop" onclick="getdata()" >
+                               อ่านข้อมูล
+                            </button>
+                            <button type="button" class="btn btn-info col-xxs-mtop" onclick="location.href='@Url.Action("MenuView", "Admin")'">
+                                <i class="fas fa-sync"></i> อัพเดทข้อมูล
+                            </button>
+                        </div>                     
+                        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                            <button id="exportExcel" type="button" class="btn btn-info col-xxs-mtop" >
+                                <i class="fa fa-file-excel-o"></i> Export Excel
+                            </button>
+
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                            @*<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"> ตั้งค่า excel</button>*@
+                            <a href="#divForm" class="button primary" id="btnForm"><i class="fa fa-cog"> ตั้งค่า excel</i></a>
+                        </div>
+                    </div>     
+
+                    <div >
+                        <table id="switch-hitters" class="table table-condensed table-striped"></table>
+                    </div>                  
+                </div>             
+            </div>
+            <hr class="colorgraph">
+        </div>
+
+    </div>
+</div>
+
+<script src="~/Scripts/admin/ExcelApi.js"></script>

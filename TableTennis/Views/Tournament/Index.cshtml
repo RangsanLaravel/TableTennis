@@ -1,0 +1,76 @@
+﻿@model IEnumerable<TOURNAMENT>
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (Model == null)
+{
+    <h1>Error</h1>
+}
+else
+{
+    <diV class="container">
+        <br />
+        @foreach (var item in Model)
+        {
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-12 @*col-sm-offset-1*@">
+                <div style="background-color: whitesmoke;border-radius: 10px;padding:2em">
+                    <div class="row">
+                        @foreach (var img in item.img)
+                        {
+                            <div class="col-md-2">
+                                <img src="@(img)" height="100" width="100" />
+                            </div>
+                        }                               
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3><a href="#">@item.TH_TOUR_NAME</a></h3>
+                            <h3>@item.EN_TOUR_NAME</h3>
+                            <h4>@item.TOUR_ADDRESS</h4>
+                            <h4>@item.TOUR_POINT</h4>
+                            <h4>@item.DESCRIPTION</h4>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    @if (ViewBag.id != null)
+                                    {
+                                        <form id="@item.ID" method="post" action="@Url.Action("Register","Tournament")">
+                                            <input type="hidden" name="tourId" value="@item.ID" />
+                                            <input type="hidden" name="id" value="@ViewBag.id" />
+                                            <input type="hidden" name="catId" value="1" />
+                                            <label><a onclick="register(@item.ID)">สมัครการแข่งขัน</a></label>
+                                        </form>
+                                    }
+                                </div>
+                                <div class="col-md-4">
+                                    <form id="@("rs"+item.ID)" method="post" action="@Url.Action("Result","Tournament")">
+                                        <input type="hidden" name="tourId" value="@item.ID" />
+                                        <input type="hidden" name="catId" value="1" />
+                                        <label><a onclick="rsPlay(@item.ID)">รายชื่อผู้เข้าร่วมการแข่งขัน</a></label>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <br />
+        }
+    </diV>
+   
+}
+
+@section scripts{
+    <script type="text/javascript">
+        function register(e) {
+            $('#' + e).submit();
+        }
+
+        function rsPlay(e) {
+            $('#rs' + e).submit();
+        }
+    </script>
+    }

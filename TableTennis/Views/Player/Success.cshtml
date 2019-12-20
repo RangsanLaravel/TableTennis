@@ -1,0 +1,44 @@
+﻿@model PLAYER
+
+@{
+    ViewBag.Title = "Success";
+    Layout = "~/Views/Shared/PlayerLayout.cshtml";
+}
+
+
+@if (Model != null)
+{
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" style="background-color: whitesmoke;border-radius: 10px;">
+            <br />
+            <h1>คุณลงชื่อนักกีฬาเรียบร้อย</h1>
+            <h3><small>รหัสที่ใช้สมัครการแข่งขัน คือ</small> @Model.ID</h3>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <label>@Model.FIRST_NAME @Model.LAST_NAME</label>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    @if (Model.GENDER == 'M')
+                    {
+                        <label>เพศ ชาย</label>
+                    }
+                    else
+                    {
+                        <label>เพศ หญิง</label>
+                    }
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <label>วัน/เดือน/ปี เกิด @Model.BIRTH_DATE_STR</label>
+                </div>
+            </div>
+           
+            <div class="row">
+                <div class="col-xs-12 col-md-6"><a href="@Url.Action("Result","Player")" class="btn btn-success btn-block btn-lg">ดูรายชื่อนักกีฬาทั้งหมด</a></div>
+            </div>
+            <br />
+            <br />
+        </div>
+    </div>
+
+}
+

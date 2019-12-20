@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "แก้ไข";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="modal-header">
+    <h3> แก้ไขข้อมูล {{item.ROLE_DESCRIPTION}}</h3>
+</div>
+<form name="form.userForm" ng-submit="submitForm()" novalidate>
+    <div class="modal-body mainbox  ">
+
+        <!-- USER ID -->
+        <div class="form-group  detailbox">
+            <div class="databox">
+                <label>USER ID</label>
+                <input type="text" name="userid" class="form-control" ng-model="item.USER_ID">
+                <p ng-show="form.userForm.name.$invalid && !form.userForm.name.$pristine" class="help-block">You USER_ID is required.</p>
+            </div>
+        </div>
+
+        <!-- USERNAME -->
+        <div class="form-group detailbox">
+            <div class="databox">
+                <label>Name</label>
+                <input type="text" name="username" class="form-control" ng-model="item.USER_NAME">
+                <p ng-show="form.userForm.name.$invalid && !form.userForm.name.$pristine" class="help-block">You name is required.</p>
+            </div>
+        </div>
+
+        <!-- SURNAME -->
+        <div class="form-group detailbox">
+            <div class="databox">
+                <label>surname</label>
+                <input type="text" name="surname" class="form-control" ng-model="item.USER_SURNAME" ng-maxlength="255">
+                <p ng-show="form.userForm.username.$error.minlength" class="help-block">Surname is too short.</p>
+                <p ng-show="form.userForm.username.$error.maxlength" class="help-block">Surname is too long.</p>
+            </div>
+        </div>
+
+        <!-- EMAIL -->
+        <div class="form-group detailbox">
+            <div class="databox">
+                <label>Email</label>
+                <input type="text" name="email" class="form-control" ng-model="item.EMAIL">
+                @*<p ng-show="form.userForm.email.$invalid && !form.userForm.email.$pristine" class="help-block">Enter a valid email.</p>*@
+            </div>
+        </div>
+
+        <!-- Phone Number -->
+        <div class="form-group detailbox" ng-if="item.ROLE_ID==3">
+            <div class="databox">
+                <label>Phone Number</label>
+                <input type="text" name="phonenumber" class="form-control" ng-model="item.PHONE">
+                @*<p ng-show="form.userForm.email.$invalid && !form.userForm.email.$pristine" class="help-block">Enter a valid Phone Number.</p>*@
+            </div>
+        </div>
+
+        <!-- Team -->
+        <div class="form-group detailbox" ng-if="item.ROLE_ID == 2">
+            <div class="databox">
+                <label>Team</label>
+                <input type="text" name="team" class="form-control" ng-model="item.TEAM">
+                @*<p ng-show="form.userForm.email.$invalid && !form.userForm.email.$pristine" class="help-block">Enter a valid Team.</p>*@
+            </div>
+        </div>
+
+        <div class="row col-lg-12 col-sm-12 col-md-12">
+            <!-- Birth day -->
+            <div class="form-group  detailbox  col-lg-6 col-sm-6 col-md-6" ng-if="item.ROLE_ID == 3">
+                <div class="databox">
+                    <label>Birth day</label>
+                    <div class="col-xs-12 col-sm-12 col-md-12 databox">
+                        <input type="text" name="datetimepicker" id="datetimepicker" ng-model="item.BIRTH_DATE_STR" style="z-index : 1151;" class="form-control" placeholder="วัน/เดือน/ปีเกิด(พ.ศ.)">
+                    </div>
+                </div>
+            </div>
+            <!-- เพศ -->
+            <div class="form-group detailbox  col-lg-6 col-sm-6 col-md-6" ng-if="item.ROLE_ID != 1">
+                <label> เพศ </label> <br />
+                <select class="select" ng-model="item.GENDER" ng-init="_gender.GEN_CODE =item.GENDER">
+                    <option value="" disabled="disabled" hidden="hidden"> - เพศ - </option>
+                    <option value="{{_gender.GEN_CODE}}" style="font-size:20px;" ng-repeat="_gender in gen" ng-bind="_gender.GEN_NAME"></option>
+                </select>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button ng-click="save()" class="btn btn-primary" ng-disabled="form.userForm.$invalid">OK</button>
+        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+</form>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        setDatePicker('datetimepicker');
+    });
+</script>

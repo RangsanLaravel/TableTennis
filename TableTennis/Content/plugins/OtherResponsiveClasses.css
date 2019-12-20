@@ -1,0 +1,24 @@
+﻿
+
+.md-align-left {
+    text-align: right;
+}
+
+
+@media (min-width: 768px) {
+    .md-align-left {
+        text-align: right;
+    }
+}
+
+@media (min-width: 992px) {
+    .md-align-left {
+        text-align: left;
+    }
+}
+
+@media (min-width: 1200px) {
+    .md-align-left {
+        text-align: right;
+    }
+}

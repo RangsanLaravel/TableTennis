@@ -1,0 +1,136 @@
+﻿@model IEnumerable<RANKING>
+@{
+    ViewBag.Title = "สร้างทัวร์นาเมนต์";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<div id="main" class="container">
+    @*<div class="row mainbox">*@
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-3 col-md-offset-3 wapper radius subbox ">
+            <form role="form" method="post" action="@Url.Action("AddTournament","Admin")">
+                <h2 class="col-all-center">สร้างทัวร์นาเม้นต์</h2>
+                <hr class="colorgraph">
+                @if (ViewBag.ErrorMesasge == null)
+                {
+                    <div class="row detailbox">
+                        <div class="col-xs-12 col-sm-3 col-md-3 databox">
+                            <div class="form-group">
+                                <input type="text" name="CODE" id="CODE" class="form-control" placeholder="รหัสทัวร์นาเม้น" tabindex="1">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 detailbox  databox">
+                            <select name="RANKING_ID" class="select">
+                                @foreach (var item in Model)
+                                {
+                                    <option value="@item.ID">@item.DESC</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-xs-12 col-sm-3 col-md-3">
+                            <a href="@Url.Action("UploadLogo","admin")" class="fancyboxSmall fancybox.iframe"><i class="fa fa-camera fa-2x"></i></a>
+                        </div>
+                    </div>
+                    <div class="row detailbox">
+                        <div class="col-xs-12 col-sm-12 col-md-12 databox">
+                            <div class="form-group">
+                                <input type="text" name="EN_TOUR_NAME" id="EN_TOUR_NAME" class="form-control" placeholder="ชื่อภาษาอังกฤษ" tabindex="2" style="max-width:100%">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row detailbox">
+                        <div class="col-xs-12 col-sm-12 col-md-12 databox">
+                            <div class="form-group">
+                                <input type="text" name="TH_TOUR_NAME" id="TH_TOUR_NAME" class="form-control" placeholder="ชื่อภาษาไทย" tabindex="3" style="max-width:100%">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row detailbox">
+                        <div class="col-xs-12 col-sm-12 col-md-12 databox">
+                            <div class="form-group">
+                                <input type="text" name="TOUR_POINT" id="TOUR_POINT" class="form-control" placeholder="คะแนน" tabindex="4" style="max-width:100%">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row detailbox">
+                        <div class="col-xs-12 col-sm-12 col-md-12 databox">
+                            <div class="form-group">
+                                <input type="text" name="TOUR_ADDRESS" id="TOUR_ADDRESS" class="form-control" placeholder="รายละเอียดสถานที่" tabindex="5" style="max-width:100%">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row detailbox">
+                        <div class="col-xs-12 col-sm-12 col-md-12 databox">
+                            <div class="form-group">
+                                <input type="text" name="DESCRIPTION" id="DESCRIPTION" class="form-control" placeholder="รายละเอียดอื่นๆ" tabindex="6" style="max-width:100%">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row detailbox">
+                        <div class="col-xs-12 col-sm-6 col-md-6 databox">
+                            <div class="form-group">
+                                <input type="text" name="TOUR_START_ON_STR" id="TOUR_START_ON_STR" class="form-control" placeholder="วัน/เดือน/ปี(พ.ศ.) เริ่มแข่งขัน" tabindex="7">
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6 databox">
+                            <div class="form-group">
+                                <input type="text" name="TOUR_END_ON_STR" id="TOUR_END_ON_STR" class="form-control" placeholder="วัน/เดือน/ปี(พ.ศ.) สิ้นสุด" tabindex="8">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row detailbox">
+                        <div class="col-xs-12 col-sm-12 col-md-12 databox">
+                            <div class="form-group">
+                                <input type="text" name="EXPIRE_ON_STR" id="EXPIRE_ON_STR" class="form-control" placeholder="วัน/เดือน/ปี(พ.ศ.) สิ้นสุดลงการทะเบียน" tabindex="9" style="max-width:100%">
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="colorgraph">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 detailbox col-all-mtop col-all-center">
+                        <div class="col-xs-12 col-md-6 databox">
+                            <button type="submit" class="btn btn-primary col-xxs-mtop">
+                                <i class="fa fa-floppy-o"></i> บันทึก
+                            </button>
+                        </div>
+                        <div class="col-xs-12 col-md-6 databox">
+                            <button type="button" class="btn btn-info col-xxs-mtop" onclick="location.href='@Url.Action("MenuView", "Admin")'">
+                                <i class="fa fa-arrow-right"></i> ย้อนกลับ
+                            </button>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <h3>เกิดข้อผิดพลาด</h3>
+                    <p>@ViewBag.ErrorMesasge </p>
+                }
+            </form>
+
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        setDatePickerFromTo('TOUR_START_ON_STR', 'TOUR_END_ON_STR');
+        setDatePicker('EXPIRE_ON_STR');
+    });
+    //$(document).ready(function () {
+    //    $(".fancyboxFull").fancybox(
+    //        {
+    //            width: '100%',
+    //            height: '100%'
+    //        });
+    //});
+    $(document).ready(function () {
+        $(".fancyboxSmall").fancybox(
+            {
+                autoSize: false,
+                width: '700px',
+                height: '700px'
+            });
+    });
+</script>
+

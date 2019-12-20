@@ -1,0 +1,8 @@
+﻿@if (Session["ManagerId"] != null)
+{
+    <a href="@Url.Action("Index","Manager")" class="navbar-brand nav-cus" style="color:white;"><span class="glyphicon glyphicon-user"></span> @Session["ManagerName"] </a>
+    <a href="@Url.Action("SignOut","Manager")" class="navbar-brand nav-cus" style="color:white;"><span class="glyphicon glyphicon-log-out"></span> ออกจากระบบ</a>
+}
+else{ 
+    <a href="@Url.Action("SignIn","Manager")" class="navbar-brand nav-cus" style="color:white;"><span class="glyphicon glyphicon-log-in"></span> เข้าสู่ระบบ</a>
+}

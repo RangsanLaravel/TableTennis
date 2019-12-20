@@ -1,0 +1,236 @@
+﻿@model REGISTER
+
+@if (Model != null)
+{
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-1">
+            <div class="col-xs-12 col-md-6">
+                @if (Model.tournament.EXPRIE_B)
+                {
+                    <a data-toggle="modal" data-target="#myModal" class="btn btn-success btn-block btn-lg">เพิ่มนักกีฬา</a>
+                }
+                else if (Session["Login"] != null && (bool)Session["Login"])
+                {
+                    <a data-toggle="modal" data-target="#myModal" class="btn btn-success btn-block btn-lg">เพิ่มนักกีฬา</a>
+                }
+            </div>
+            <div class="col-xs-12 col-md-6">
+                <a href="http://119.59.117.150/TableTennis_Report/Reports/RegisterReport.aspx?cateId=@(Model.catMapTour.CAT_ID)&tourId=@(Model.tournament.ID)&managerId=@(Model.manager.ID)" target="_blank" class="btn btn-success btn-block btn-lg">ดาวน์โหลดเอกสารจ่ายเงิน</a>
+            </div>
+        </div>
+    </div>
+    
+    <hr class="colorgraph">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="conTable" style="padding:40px;">
+            </div>
+        </div>
+    </div>
+    <input id="manager_id" type="hidden" value="@Model.manager.ID" />
+    <input id="manager_code" type="hidden" value="@Model.manager.MANAGER_CODE" />
+    <input id="tourId" type="hidden" value="@Model.tournament.ID" />
+    <input id="category_id" type="hidden" value="@Model.catMapTour.CAT_ID" />
+    if (Model.tournament.EXPRIE_B)
+    {
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">เพิ่มนักกีฬา</h4>
+                    </div>
+                    <div class="modal-body" style="height:auto">
+                        <div class="col-xs-12 col-sm-8 col-md-12 col-sm-offset-2 col-md-offset-1">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>ประเภทการแข่งขัน</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <select id="even" class="form-control">
+                                            @foreach (var item in Model._event)
+                                            {
+                                                <option value="@item.ID">@item.TH_EVENT_NAME</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>รหัสนักกีฬา</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <input type="text" name="PLAYER_CODE" id="player_code" class="form-control input-lg" placeholder="รหัสนักกีฬา" tabindex="1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>ชื่อ - นามสกุล</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <input type="text" name="NAME" id="name" class="form-control input-lg" placeholder="ชื่อ-นามสกุล" tabindex="1" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>สังกัด</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <input type="text" name="TEAM" id="team" value="@Model.manager.TEAM" class="form-control input-lg" placeholder="ทีม" tabindex="1" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>เพศ</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <input type="text" name="GENDER" id="gender" class="form-control input-lg" placeholder="เพศ" tabindex="1" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>ปีเกิด</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <input type="text" name="BIRTH_DATE" id="birth_date" class="form-control input-lg" placeholder="วัน/เดือน/ปี เกิด" tabindex="1" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>อายุ</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <input type="text" name="AGE" id="age" class="form-control input-lg" placeholder="อายุ" tabindex="1" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="border-top:0px">
+                        <button type="button" class="btn btn-primary" id="addPlay" data-dismiss="modal" disabled>เพิ่ม</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else if (Session["Login"] != null && (bool)Session["Login"])
+    {
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">เพิ่มนักกีฬา</h4>
+                    </div>
+                    <div class="modal-body" style="height:auto">
+                        <div class="col-xs-12 col-sm-8 col-md-12 col-sm-offset-2 col-md-offset-1">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>ประเภทการแข่งขัน</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <select id="even" class="form-control">
+                                            @foreach (var item in Model._event)
+                                            {
+                                                <option value="@item.ID">@item.TH_EVENT_NAME</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>รหัสนักกีฬา</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <input type="text" name="PLAYER_CODE" id="player_code" class="form-control input-lg" placeholder="รหัสนักกีฬา" tabindex="1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>ชื่อ - นามสกุล</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <input type="text" name="NAME" id="name" class="form-control input-lg" placeholder="ชื่อ-นามสกุล" tabindex="1" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>สังกัด</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <input type="text" name="TEAM" id="team" value="@Model.manager.TEAM" class="form-control input-lg" placeholder="ทีม" tabindex="1" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>เพศ</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <input type="text" name="GENDER" id="gender" class="form-control input-lg" placeholder="เพศ" tabindex="1" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>ปีเกิด</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <input type="text" name="BIRTH_DATE" id="birth_date" class="form-control input-lg" placeholder="วัน/เดือน/ปี เกิด" tabindex="1" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>อายุ</label>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <input type="text" name="AGE" id="age" class="form-control input-lg" placeholder="อายุ" tabindex="1" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer" style="border-top:0px">
+                        <button type="button" class="btn btn-primary" id="addPlay" data-dismiss="modal" disabled>เพิ่ม</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+
+}
+
+

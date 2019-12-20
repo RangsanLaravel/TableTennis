@@ -1,0 +1,18 @@
+﻿@model IEnumerable<TOUR_REGISTER_VIEW>
+
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.TH_EVENT_NAME</td>
+            <td>@item.ID</td>
+            <td>@item.FIRST_NAME @item.LAST_NAME</td>
+            <td>@item.TEAM</td>
+            <td>@item.GENDER_DESC</td>
+            <td>@item.BIRTH_YEAR</td>
+            <td>@item.AGE</td>
+            <td>@item.RANK</td>
+        </tr>
+    }
+}

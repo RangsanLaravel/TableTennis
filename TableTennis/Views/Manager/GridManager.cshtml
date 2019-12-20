@@ -1,0 +1,16 @@
+﻿@model IEnumerable<MANAGER>
+
+@if(Model != null)
+{
+    var i = 0;
+    foreach(var item in Model)
+    {
+        i = i + 1;
+<tr>
+    <td>@(i)</td>
+    <td>@item.ID</td>
+    <td>@item.FIRST_NAME @item.LAST_NAME</td>
+    <td>@item.TEAM</td>
+</tr>
+    }
+}

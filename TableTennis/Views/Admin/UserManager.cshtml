@@ -1,0 +1,266 @@
+﻿
+@{
+    ViewBag.Title = "สิทธิ์ผู้ใช้งานขั้นสูง";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<style type="text/css">
+    /*body {
+            color: #404E67;
+            background: #F5F7FA;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .table-wrapper {
+            width: 700px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 1px 1px rgba(0,0,0,.05);
+        }
+
+        .table-title {
+            padding-bottom: 10px;
+            margin: 0 0 10px;
+        }
+
+            .table-title h2 {
+                margin: 6px 0 0;
+                font-size: 22px;
+            }
+
+            .table-title .add-new {
+                float: right;
+                height: 30px;
+                font-weight: bold;
+                font-size: 12px;
+                text-shadow: none;
+                min-width: 100px;
+                border-radius: 50px;
+                line-height: 13px;
+            }
+
+                .table-title .add-new i {
+                    margin-right: 4px;
+                }
+
+        table.table {
+            table-layout: fixed;
+        }
+
+            table.table tr th, table.table tr td {
+                border-color: #e9e9e9;
+            }
+
+            table.table th i {
+                font-size: 13px;
+                margin: 0 5px;
+                cursor: pointer;
+            }
+
+            table.table th:last-child {
+                width: 100px;
+            }*/
+
+    table.table td a {
+        cursor: pointer;
+        display: inline-block;
+        margin: 0 5px;
+        min-width: 24px;
+    }
+
+        table.table td a.add {
+            color: #27C46B;
+        }
+
+        table.table td a.edit {
+            color: #FFC107;
+        }
+
+        table.table td a.delete {
+            color: #E34724;
+        }
+
+    table.table td i {
+        font-size: 19px;
+    }
+
+    table.table td a.add i {
+        font-size: 24px;
+        margin-right: -1px;
+        position: relative;
+        top: 3px;
+    }
+
+    table.table .form-control {
+        height: 32px;
+        line-height: 32px;
+        box-shadow: none;
+        border-radius: 2px;
+    }
+
+        table.table .form-control.error {
+            border-color: #f50000;
+        }
+
+    table.table td .add {
+        display: none;
+    }
+
+    .ddlpagetb {
+        padding-right: 27px;
+        width: 100px;
+        font-size: 16px;
+    }
+</style>
+
+<script src="~/Scripts/admin/UserManager.js"></script>
+
+<div id="main" class="container-fluid" ng-app="UserModule" ng-controller="UserController" hidden="hidden">
+    <div class="row mainbox" ng-init="initial('')">
+        <input type="hidden" id="hdGetUrl" name="name" value="@Url.Action("GetUrlActionUserManager", "Admin")" />
+        @*ทำแบคกราวสีดำ*@
+        <div class="col-xs-12 col-sm-12 col-md-12 wapper radius subbox ">
+            <h2 class="col-all-center"> สิทธิ์ผู้ใช้งานขั้นสูง </h2>
+            <hr class="colorgraph">
+
+            <div class="panel-group" id="accordion">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 wapper radius subbox ">
+                    <div class="row">
+                        <div class="col-xs-12 col-md-9">
+                            <div class="panel-heading">
+                                <h3 class="headline" style="width: 270px;"> ค้นหาผู้ใช้งาน </h3>
+                            </div>
+                        </div>
+                        <div class="col-xs-6 col-md-3">
+                            <button type="button" class="btn btn-info col-xxs-mtop" onclick="location.href='@Url.Action("MenuView", "Admin")'">
+                                <i class="fa fa-arrow-right"></i> ย้อนกลับ
+                            </button>
+                        </div>
+                    </div>
+                 
+                    <div class="row">
+                        <div id="usertype" class="detailbox col-all-mtop col-lg-2 col-md-6 col-sm-6 col-xs-12">
+                            <select class="select" ng-model="model.datauser.ROLE_ID.val" ng-change="role_change()" >
+                                <option value="" disabled="disabled" hidden="hidden"> - เลือก - </option>
+                                <option value="{{_role.ROLE_ID}}"  ng-repeat="_role in master.role">{{_role.ROLE_DESCRIPTION}}</option>
+                            </select>
+                        </div>
+
+                        <div id="userid" class="detailbox col-all-mtop col-lg-1 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 databox">
+                                <input type="text" ng-model="model.datauser.USER_ID.val" class="form-control" placeholder="รหัสประจำตัว" />
+                            </div>
+                        </div>
+
+                        <div id="username" class="detailbox col-all-mtop col-lg-2 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 databox">
+                                <input type="text" ng-model="model.datauser.USER_NAME.val" class="form-control" placeholder="ชื่อ" />
+                            </div>
+                        </div>
+
+                        <div id="usersurname" class="detailbox col-all-mtop col-lg-2 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 databox">
+                                <input type="text" ng-model="model.datauser.USER_SURNAME.val" class="form-control" placeholder="นามสกุล" />
+                            </div>
+                        </div>
+
+                        <div id="email" class="detailbox col-all-mtop col-lg-2 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 databox">
+                                <input type="email" ng-model="model.datauser.EMAIL.val" class="form-control" placeholder="อีเมล" />
+                            </div>
+                        </div>
+
+                        <div id="password" class="col-all-mtop col-lg-2 col-md-6 col-sm-6 col-xs-12">
+                            <div class="input-group">
+                                <input type="password" ng-model="model.datauser.PASSWORD.val" class="form-control pwd" placeholder="รหัสผ่าน" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default reveal" type="button"><i class="glyphicon glyphicon-eye-open"></i></button>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 detailbox col-all-mtop col-all-center">
+
+                        <button type="button" class="btn btn-primary col-xxs-mtop" style="margin-right: 30px;" ng-click="search()"> <i class="fa fa-search"></i> ค้นหา </button>
+
+                        <button type="button" class="btn btn-success col-xxs-mtop" style="margin-right: 30px;" ng-click="adduser()" ng-hide="model.datauser.ROLE_ID.val !=1"> <i class="fa fa-plus-circle"></i> เพิ่ม </button>
+
+                        <button type="button" class="btn btn-success col-xxs-mtop" style="margin-right: 30px;" ng-show="model.datauser.ROLE_ID.val==2" onclick="location.href='@Url.Action("SignUp","Manager")'"> <i class="fa fa-plus-circle"></i> เพิ่ม </button>
+
+                        <button type="button" class="btn btn-success col-xxs-mtop" style="margin-right: 30px;" ng-show="model.datauser.ROLE_ID.val==3" onclick="location.href='@Url.Action("SignUp","Player")'"> <i class="fa fa-plus-circle"></i> เพิ่ม </button>
+
+                        <button type="button" class="btn btn-danger col-xxs-mtop" style="margin-left: 30px;" ng-click="clear()"> <i class="fa fa-eraser"></i> เคลียร์ </button>
+
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div id="bodycontent" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="table-responsive">
+                            <table class="hint-table  table table-striped" style="width: 100%; font-size: 1.5em;">
+                                <thead>
+                                    <tr>
+                                        <th width="5%" style="min-width:60px;">ลำดับ</th>                                       
+                                        <th>รหัสผู้ใช้งาน</th>
+                                        <th>ชื่อ - นามสกุล</th>
+                                        <th>EMAIL</th>
+                                        <th>กลุ่มผู้ใช้งาน</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr pagination-id="bodycontent" dir-paginate="_datauser in  master.datauser | itemsPerPage:pagination.size ">
+                                        <td ng-bind="pagination.begin + $index + 1"></td>
+                                        <td ng-bind="_datauser.ID"></td>                                     
+                                        <td>{{_datauser.USER_NAME}}  {{_datauser.USER_SURNAME}}</td>
+                                        <td ng-bind="_datauser.EMAIL"></td>
+                                        <td ng-bind="_datauser.ROLE_DESCRIPTION"></td>
+                                        <td>                                           
+                                            <a ng-if="_datauser.ROLE_ID==2" class="Edit" title="จัดทีม" data-toggle="tooltip" ng-click="manager(_datauser.ID)"><i class="fa fa-group"></i></a>|
+                                            <a class="Edit" title="แก้ไขข้อมูล" data-toggle="tooltip" ng-click="showForm(_datauser)"><i class="fa fa-edit"></i></a>|
+                                            <a ng-if="_datauser.isAdmin" class="delete" title="ลบข้อมูล" data-toggle="tooltip" ng-click="removeConfirm(_datauser)"><i class="fa fa-trash-o"></i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+
+                            <div class="detailbox col-lg-2 col-md-2 col-sm-2 col-xs-2">
+                                <select ng-change="dataperpageChang()" class="ddlpagetb" ng-model="model.dataperpage">
+                                    <option value="{{data}}" ng-repeat="data in model.dataperpagelist">{{data}}</option>
+                                </select>
+                            </div>
+
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                                <dir-pagination-controls class="pull-right"
+                                                         max-size="pagination.maxSize"
+                                                         on-page-change="pageChanged(newPageNumber)"
+                                                         pagination-id="bodycontent"
+                                                         direction-links="true"
+                                                         boundary-links="true">
+                                </dir-pagination-controls>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="colorgraph">
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(".reveal").on('click', function () {
+        var $pwd = $(".pwd");
+        if ($pwd.attr('type') === 'password') {
+            $pwd.attr('type', 'text');
+        } else {
+            $pwd.attr('type', 'password');
+        }
+    });
+</script>

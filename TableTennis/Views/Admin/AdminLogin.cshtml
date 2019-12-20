@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "เข้าสู่ระบบ";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<body class="bg">
+    <div class="container">
+        <div class="login-form">
+            <form role="form" method="post" action="@Url.Action("AdminLogin","admin")">
+                <h2 class="col-all-center">เข้าสู่ระบบ</h2>
+                <hr class="colorgraph">
+                <div class="form-group input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input type="text" autofocus name="UserID" class="form-control" placeholder="UserID or Email" required="required">
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <input type="password" name="Password" class="form-control pwd" placeholder="Password" required="required">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default reveal" type="button"><i class="glyphicon glyphicon-eye-open"></i></button>
+                        </span>
+                    </div>
+                </div>
+                <h3>
+                    <label>@ViewBag.ErrorMessage</label>
+                </h3>
+                <hr class="colorgraph">
+                <div class="form-group">                 
+                        <button type="submit" class="btn btn-primary btn-block">Log in</button>                                    
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+<script>
+    $(".reveal").on('click', function () {
+        var $pwd = $(".pwd");
+        if ($pwd.attr('type') === 'password') {
+            $pwd.attr('type', 'text');
+        } else {
+            $pwd.attr('type', 'password');
+        }
+    });
+</script>
+
+
+

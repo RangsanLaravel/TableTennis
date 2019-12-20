@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "ลบทัวร์นาเม้น";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<script src="~/Scripts/admin/RemoveTournament.js"></script>
+<div id="main" class="container-fluid" ng-app="tourModule" ng-controller="tourController" hidden="hidden">
+    @*<div class="row mainbox">*@
+    <div class="row mainbox" ng-init="initial('')">
+        <input type="hidden" id="hdGetUrl" name="name" value="@Url.Action("GetUrlActionRemoveTour", "Admin")" />
+        @* <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-3 col-md-offset-3 wapper radius subbox ">*@
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 wapper radius subbox">
+            <h2 class="col-all-center"> ลบทัวร์นาเม้น </h2>
+            <hr class="colorgraph">
+            <div class="row">
+                <div class="col-xs-12 col-md-9">
+                    <div class="panel-heading">
+                        <h3 class="headline" style="width: 270px;"> ลบทัวร์นาเม้น </h3>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-3">
+                    <button type="button" class="btn btn-info col-xxs-mtop" onclick="location.href='@Url.Action("MenuView", "Admin")'">
+                        <i class="fa fa-arrow-right"></i> ย้อนกลับ
+                    </button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div id="bodycontent" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="table-responsive">
+                        <table class="hint-table  table table-striped" style="width: 100%; font-size: 1.5em;">
+                            <thead>
+                                <tr>
+                                    <th> ID </th>
+                                    <th> รหัสทัวร์นาเม้น </th>
+                                    <th> ชื่อภาษาอังกฤษ </th>
+                                    <th> ชื่อภาษาไทย </th>
+                                    <th> ลบ </th>
+                                </tr>
+                            </thead>
+                            <tbody ng-repeat="_tournament in master.tournament">
+                                <tr >
+                                    <td ng-bind="_tournament.ID"></td>
+                                    <td ng-bind="_tournament.CODE"> </td>
+                                    <td ng-bind="_tournament.EN_TOUR_NAME"></td>
+                                    <td ng-bind="_tournament.TH_TOUR_NAME"></td>
+                                    <td>
+                                        <span class="middle">
+                                            <a href="#" title="ลบ" style="text-align:center; vertical-align: middle;font-size:20px;color:#fb3131;" ng-click="removeTourConfirm(_tournament.ID)">
+                                                <i class="fa fa-trash-o">
+                                                </i>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr class="colorgraph">
+                </div>
+            </div>
+        </div>
+    </div>
+    @*</div>*@
+</div>
+
+
+

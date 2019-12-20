@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "SuccessRecover";
+    Layout = "~/Views/Shared/ManagerLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" style="background-color: whitesmoke;border-radius: 10px;">
+        <br />
+        <br />
+        <br />
+        <br />
+        <h4>รหัสที่ใช้สมัครการแข่งขันถูกส่งไปที่ อีเมล @ViewBag.Email เรียบร้อย</h4>
+        <h4>กรุณาตรวจรายละเอียดที่อีเมลของท่าน</h4>
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-xs-12 col-md-4"><a href="@Url.Action("SignIn","Manager")" class="btn btn-success btn-block btn-lg">เข้าสู่ระบบ</a></div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+    </div>
+</div>

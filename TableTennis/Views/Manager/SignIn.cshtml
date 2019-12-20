@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "SignIn";
+    Layout = "~/Views/Shared/ManagerLayout.cshtml";
+}
+
+<style>
+    .colorgraph {
+        height: 5px;
+        border-top: 0;
+        background: #c4e17f;
+        border-radius: 5px;
+        background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    }
+</style>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" style="background-color: whitesmoke;border-radius: 10px;">
+        <div class="row" style="margin: 30px;">
+            <form role="form" method="post" action="@Url.Action("SignIn","Manager")">
+                <h2>กรุณาใส่อีเมล และรหัส <small>เพื่อเข้าสู่ระบบสมัครการแข่งขัน</small></h2>
+                <hr class="colorgraph">
+                <div class="form-group">
+                    <input type="email" name="EMAIL" id="email" class="form-control input-lg" placeholder="อีเมล" tabindex="4" style="max-width:100%" value="@ViewBag.email">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="MANAGER_CODE" id="manager_code" class="form-control input-lg" placeholder="รหัส" tabindex="4" style="max-width:100%" value="@ViewBag.code">
+                </div>
+                <p id="validate" style="color:red;">@ViewBag.Validate</p>
+                <div class="row" style="margin: 0;">
+                    <a href="@Url.Action("Recover","Manager")">หากลืมรหัส</a>
+                </div>
+                <hr class="colorgraph">
+                <div class="row">
+                    <div class="col-xs-12 col-md-4">
+                    <input type="submit" value="เข้าสุ่ระบบ" class="btn btn-primary btn-block btn-lg" tabindex="7">
+                    </div>
+                    <div class="col-xs-12 col-md-8" style="text-align:center;">
+                        <p><a style="font-size:20px;" href="@Url.Action( "SignUp","Manager")">ลงทะเบียน</a></p>
+                    </div>
+                </div>
+            </form>
+        </div> 
+        <br />
+    </div>
+</div>

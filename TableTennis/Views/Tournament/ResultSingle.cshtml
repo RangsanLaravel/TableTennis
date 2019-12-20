@@ -1,0 +1,94 @@
+﻿@model REGISTER
+<style>
+    th, td {
+        min-width: 50px;
+        width: auto;
+    }
+
+    .pyName {
+        min-width: 150px;
+    }
+</style>
+@if (Model != null)
+{
+    <input type="hidden" id="tour_id" value="@Model.tournament.ID" />
+    <input type="hidden" id="cat_id" value="@Model.catMapTour.CAT_ID" />
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-10 col-sm-offset-2 col-md-offset-1">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>รายชื่อนักกีฬาที่เข้าร่วมการแข่งขัน</h3>
+                    <h3>@Model.tournament.TH_TOUR_NAME</h3> 
+                    <h3>@Model.tournament.EN_TOUR_NAME</h3>
+                    <h4>@Model.tournament.DESCRIPTION</h4>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select id="even" class="form-control">
+                            <option value="">เลือกทั้งหมด</option>
+                            @foreach (var item in Model._event)
+                            {
+                                <option value="@item.ID">@item.TH_EVENT_NAME</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input type="text" name="ID" id="play_id" class="form-control " placeholder="รหัส" tabindex="1">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <input type="text" name="NAME" id="name" class="form-control " placeholder="ชื่อ-นามสกุล" tabindex="1">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select id="team" class="form-control">
+                            <option value="">เลือกทั้งหมด</option>
+                            @foreach (var item in Model.slTeam)
+                            {
+                                <option value="@item.ID">@item.DESC (@item.AMOUNT)</option>
+                            }
+                        </select>
+                        @*<input type="text" name="TEAM" id="team" class="form-control " placeholder="ทีม" tabindex="1">*@
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <button type="button" class="btn btn-primary" id="srPlay"> ค้นหา</button>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12" style="text-align:center">
+
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <table id="tbPlayer" class="table">
+                        <thead>
+                            <tr>
+                                <th>ประเภท</th>
+                                <th>รหัส</th>
+                                <th>ชื่อ-นามสกุล</th>
+                                <th>สังกัด</th>
+                                <th>เพศ</th>
+                                <th>ปีเกิด</th>
+                                <th>อายุ</th>
+                                <th>อันดับ</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

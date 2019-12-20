@@ -1,0 +1,74 @@
+﻿@*<div class="col-md-12">*@
+<div id="bodycontent" class="panel panel-default">
+    <div class="panel-body">
+        <form ng-submit="addNew()">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th width="3%"><h4><b><input type="checkbox" ng-click="checkAll()" /></b></h4></th>
+                            <th width="12%"><h4><b>รหัส Event</b></h4></th>
+                            <th width="41%"><h4><b>รายละเอียด Event</b></h4></th>
+                            <th width="12%"><h4><b>ราคา</b></h4></th>
+                            <th width="15%"><h4><b>เพศ</b></h4></th>
+                            <th width="17%"><h4><b>Rank</b></h4></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="_eventdetail in master.eventdetail">
+                            <td>
+                                <input type="checkbox" ng-model="_eventdetail.TOUR_SELECT" />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" ng-model="_eventdetail.CODE" required />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" ng-model="_eventdetail.TH_EVENT_NAME" required />
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" ng-model="_eventdetail.PRICE" required />
+                            </td>
+                            <td>
+                                <select class="detailbox" ng-model="_eventdetail.GEN_CODE" ng-init="_gender.GEN_CODE =_eventdetail.GEN_CODE">
+                                    <option value="" disabled="disabled" hidden="hidden"> - เพศ - </option>
+                                    <option value="{{_gender.GEN_CODE}}" style="font-size:20px;" ng-repeat="_gender in master.gender" ng-bind="_gender.GEN_NAME"></option>
+                                </select>
+                            </td>
+                            <td>
+                                <select class="detailbox" ng-model="_eventdetail.RANK_CODE" ng-init="_rank.RANK_CODE =_eventdetail.RANK_CODE">
+                                    <option value="" disabled="disabled" hidden="hidden"> - Rank - </option>
+                                    <option value="{{_rank.RANK_CODE}}" style="font-size:20px;" ng-repeat="_rank in master.rank" ng-bind="_rank.RANK_CODE"></option>
+                                </select>
+                            </td>
+                            <td>
+                                <span class="middle">
+                                    <a href="#" title="ลบ" style="text-align:center; vertical-align: middle;font-size:20px;color:#fb3131;" ng-click="removeEventConfirm(_eventdetail.ID)">
+                                        <i class="fa fa-trash-o">
+                                        </i>
+                                    </a>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary addnew pull-right" value="เพิ่ม Event">
+            </div>
+        </form>
+    </div>
+
+</div>
+<hr class="colorgraph">
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 detailbox col-all-mtop col-all-center">
+    <div class="col-xs-12 col-md-6 databox">
+        <button type="button" class="btn btn-primary col-xxs-mtop" ng-hide="!master.eventdetail.length" ng-click="save()"> <i class="fa fa-floppy-o"></i> บันทึก </button>
+    </div>
+    <div class="col-xs-12 col-md-6 databox">
+        <button type="button" class="btn btn-info col-xxs-mtop" onclick="location.href='@Url.Action("MenuView", "Admin")'">
+            <i class="fa fa-arrow-right"></i> ย้อนกลับ
+        </button>
+    </div>
+</div>
+@*</div>*@
+

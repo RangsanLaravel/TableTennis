@@ -1,0 +1,28 @@
+﻿@model MANAGER
+@{
+    ViewBag.Title = "Success";
+    Layout = "~/Views/Shared/ManagerLayout.cshtml";
+}
+
+@if(Model == null)
+{
+    <h1>Error</h1>
+}
+else
+{ 
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" style="background-color: whitesmoke;border-radius: 10px;">
+            <br />
+            <h1>คุณลงชื่อเพื่อของรหัสในการสมัครการแข่งขันเรียบร้อย</h1>
+            <h3><small>รหัสที่ใช้สมัครการแข่งขัน คือ</small> @Model.ID</h3>
+            <h4>รหัสที่ใช้สมัครการแข่งขันถูกส่งไปที่ Email @Model.EMAIL</h4>
+            <div class="row">
+                <div class="col-xs-12 col-md-6"><a href="@Url.Action("Index","Tournament")" class="btn btn-success btn-block btn-lg">ดำเนินการต่อ</a></div>
+            </div>
+            <br />
+            <br />
+        </div>
+    </div>
+        
+}

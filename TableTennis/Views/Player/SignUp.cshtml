@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "ลงชื่อนักกีฬา";
+    Layout = "~/Views/Shared/PlayerLayout.cshtml";
+}
+
+<style>
+    .colorgraph {
+        height: 5px;
+        border-top: 0;
+        background: #c4e17f;
+        border-radius: 5px;
+        background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    }
+</style>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3" >
+        <form role="form" method="post" action="@Url.Action("Add","Player")">
+            <h2>กรุณาลงชื่อ <small>เพื่อขอรหัสนักกีฬา</small></h2>
+            <hr class="colorgraph">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <input type="text" name="FIRST_NAME" id="first_name" class="form-control input-lg" placeholder="ชื่อ/First name" tabindex="1" required>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="form-group">
+                        <input type="text" name="LAST_NAME" id="last_name" class="form-control input-lg" placeholder="นามสกุล/Last name" tabindex="2" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <input type="radio" name="GENDER" value="M" checked> ชาย  /  Male&nbsp;&nbsp;
+                    <input type="radio" name="GENDER" value="F"> หญิง / Female
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="text" name="BIRTH_DATE" id="BIRTH_DATE" class="form-control input-lg" placeholder="วัน/เดือน/ปี เกิด(พ.ศ.)/Date of brith" tabindex="3" style="max-width:100%">
+            </div>
+            <div class="form-group">
+                <input type="email" name="EMAIL" id="email" class="form-control input-lg" placeholder="อีเมล/E-mail" tabindex="4" style="max-width:100%" required>
+            </div>
+            <div class="form-group">
+                <input type="text" name="PHONE" id="phone" class="form-control input-lg" placeholder="หมายเลขโทรศัพท์ /Phone no." tabindex="5" style="max-width:300px;">
+            </div>
+            <hr class="colorgraph">
+            <div class="row">
+                <div class="col-xs-12 col-md-6"><input type="submit" value="ลงทะเบียน / Register" class="btn btn-primary btn-block btn-lg" tabindex="7"></div>
+            </div>
+        </form>
+    </div>
+</div>
+@section scripts{
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        setDatePicker('BIRTH_DATE');
+    });
+
+</script>
+}
+
+

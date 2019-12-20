@@ -1,0 +1,50 @@
+﻿@model IEnumerable<TOUR_REGISTER_VIEW>
+
+@if (Model != null)
+{
+    <table id="tbPlayer" class="table">
+        <thead>
+            <tr>
+                <th>ประเภท</th>
+                <th>รหัส</th>
+                <th>ชื่อ-นามสกุล</th>
+                <th>สังกัด</th>
+                <th>เพศ</th>
+                <th>ปีเกิด</th>
+                <th>อายุ</th>
+                <th>จำนวนเงิน</th>
+                <th>อันดับ</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody style="background-color:white;">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.TH_EVENT_NAME</td>
+                    <td>@item.ID</td>
+                    <td style="text-align:left;">@item.FIRST_NAME @item.LAST_NAME</td>
+                    <td>@item.TEAM</td>
+                    <td>@item.GENDER_DESC</td>
+                    <td>@item.BIRTH_YEAR_STR</td>
+                    <td>@item.AGE</td>
+                    <td>@string.Format("{0:,#,###,##0.00}", item.PAY)</td>
+                    <td>@item.RANK</td>
+                    <td>@if (item.EXPRIE_B)
+                    {<button type="button" class="btn btn-danger" onclick="dlPlayer(@item.REG_ID)" data-dismiss="modal"> ลบ</button>}
+                    else if (Session["Login"] != null && (bool)Session["Login"])
+                    { <button type="button" class="btn btn-danger" onclick="dlPlayer(@item.REG_ID)" data-dismiss="modal"> ลบ</button>}</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot style="background-color:#f9f992;">
+            <tr>
+                <td colspan="7" style="text-align:center;">รวมเป็นเงิน</td>
+                <td><b>@string.Format("{0:,#,###,##0.00}", Model.Select(x => x.PAY).Sum())</b></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+    
+}

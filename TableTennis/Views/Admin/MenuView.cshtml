@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "เมนู";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<style>
+    .bg {
+        display: unset !important;
+    }
+</style>
+@*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>*@
+
+<body class="bg">
+    <div id="main" class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-3 col-md-offset-3 wapper radius subbox ">
+                @*<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mainbox">*@
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">                   
+                    <h2 class="col-all-center"> เมนูรายการ </h2> 
+                    @if (Session["DataUser"] != null)
+                            {
+                                var user = (TT_LOGIN )Session["DataUser"];
+                                var ttl =user. dataUser.USER_NAME  + "  " + user.dataUser.USER_SURNAME;
+                        <i class="glyphicon glyphicon-user" data-toggle="tooltip" title="@ttl" id='example'></i>
+                    }
+                </div>
+                <hr class="colorgraph">
+                <div class="row">
+                    <div class="col-xs-12 col-md-9">
+                        <div class="panel-heading">
+                            <h3 class="headline" style="width: 270px;"> เมนู </h3>
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-md-3">
+                        <button type="button" class="btn btn-danger col-xxs-right" onclick="location.href='@Url.Action("Logout", "Admin")'"><i class="fa fa-sign-out"></i>  ออกจากระบบ </button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="bodycontent" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="table-responsive">
+                            <table class="hint-table  table table-striped" style="width: 100%; font-size: 1.5em;">
+                                <tr class="hint-table-head">
+                                    <th width="5%" style="min-width:60px;">ลำดับ</th>
+                                    <th style="min-width:100px;">
+                                        <a href="">รายละเอียด</a>
+                                    </th>
+                                </tr>
+                                @if (Session["MENU"] != null)
+                                {
+                                    var model = (List<TT_MENU>)Session["MENU"];
+                                    foreach (var item in model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <a href="@item.MENU_URL" class="underline-text"> @item.MENU_ID </a>
+                                            </td>
+                                            <td>
+                                                <a href="@item.MENU_URL" class="underline-text"> @item.MENU_DESCRIPTION </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </table>
+                            <hr class="colorgraph">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*</div>*@
+        </div>
+
+        @*<div class="row mainbox">*@
+    </div>
+</body>
+
+<script>
+    $(document).ready(function () {
+        $("#example").tooltip();
+    });
+</script>

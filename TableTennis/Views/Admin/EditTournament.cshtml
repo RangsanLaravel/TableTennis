@@ -1,0 +1,131 @@
+﻿
+@{
+    ViewBag.Title = "แก้ไขทัวร์นาเม้นต์";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<script src="~/Scripts/admin/EditTournament.js"></script>
+
+    <div id="main" class="container" ng-app="tourEditModule" ng-controller="tourEditController" hidden="hidden">
+        @*<div class="row mainbox">*@
+
+        <div class="row mainbox" ng-init="initial('')">
+            <div class="wapper radius subbox ">
+                <input type="hidden" id="hdGetUrl" name="name" value="@Url.Action("GetUrlActionEditTour", "Admin")" />
+                <h2 class="col-all-center">แก้ไขทัวร์นาเม้นต์</h2>
+                <hr class="colorgraph">
+                <div class="row detailbox">
+                    <div class="col-xs-12 col-sm-6 col-md-6 detailbox">
+                        <select class="select" ng-model="model.tournament.val" ng-change="getdata()">
+                            <option value="" disabled="disabled" hidden="hidden"> - กรุณาเลือกทัวร์นาเม้น - </option>
+                            <option value="{{_tournament.ID}}" ng-repeat="_tournament in master.tournament">{{_tournament.CODE}}</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4 detailbox">
+                        <select class="select" ng-change="setRankID()" ng-model="model.rangking.val" ng-options="x.DESC for x in  master.rangking">
+                            @*<option value="" disabled="disabled" hidden="hidden"> - กรุณาเลือก Ranking - </option>
+                            <option value="{{_rangking.ID}}" ng-repeat="_rangking in master.rangking">{{_rangking.DESC}}</option>*@
+                        </select>
+                    </div>
+                    <div class="col-xs-12 col-sm-2 col-md-2" ng-hide="!model.tournament.fix">                       
+                        <a data-fancybox  href="@Url.Action("UploadLogo","admin")" class="fancyboxSmall fancybox.iframe"><i class="fa fa-camera fa-2x"></i></a>
+                    </div>
+                </div>
+                <div class="row detailbox">
+                    <div class="col-xs-12 col-sm-12 col-md-12 databox">
+                        <div class="form-group">
+                            <input type="text" ng-model="model.tournament.series.EN_TOUR_NAME" class="form-control" placeholder="ชื่อภาษาอังกฤษ" tabindex="2" style="max-width:100%">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row detailbox">
+                    <div class="col-xs-12 col-sm-12 col-md-12 databox">
+                        <div class="form-group">
+                            <input type="text" ng-model="model.tournament.series.TH_TOUR_NAME" class="form-control" placeholder="ชื่อภาษาไทย" tabindex="3" style="max-width:100%">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row detailbox">
+                    <div class="col-xs-12 col-sm-12 col-md-12 databox">
+                        <div class="form-group">
+                            <input type="text" ng-model="model.tournament.series.TOUR_POINT" class="form-control" placeholder="คะแนน" tabindex="4" style="max-width:100%">
+                        </div>
+                    </div>
+                </div>
+                <div class="row detailbox">
+                    <div class="col-xs-12 col-sm-12 col-md-12 databox">
+                        <div class="form-group">
+                            <input type="text" ng-model="model.tournament.series.TOUR_ADDRESS" class="form-control" placeholder="รายละเอียดสถานที่" tabindex="5" style="max-width:100%">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row detailbox">
+                    <div class="col-xs-12 col-sm-12 col-md-12 databox">
+                        <div class="form-group">
+                            <input type="text" ng-model="model.tournament.series.DESCRIPTION" class="form-control" placeholder="รายละเอียดอื่นๆ" tabindex="6" style="max-width:100%">
+                        </div>
+                    </div>
+                </div>
+                <div class="row detailbox">
+                    <div class="col-xs-12 col-sm-6 col-md-6 databox">
+                        <div class="form-group">
+                            <input type="text" ng-model="model.tournament.series.TOUR_START_ON_STR" id="TOUR_START_ON" class="form-control" placeholder="วัน/เดือน/ปี(พ.ศ.) เริ่มแข่งขัน" tabindex="7">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6 databox">
+                        <div class="form-group">
+                            <input type="text" ng-model="model.tournament.series.TOUR_END_ON_STR" id="TOUR_END_ON" class="form-control" placeholder="วัน/เดือน/ปี(พ.ศ.) สิ้นสุด" tabindex="8">
+                        </div>
+                    </div>
+                </div>
+                <div class="row detailbox">
+                    <div class="col-xs-12 col-sm-12 col-md-12 databox">
+                        <div class="form-group">
+                            <input type="text" ng-model="model.tournament.series.EXPIRE_ON_STR" id="EXPIRE_ON" class="form-control" placeholder="วัน/เดือน/ปี(พ.ศ.) สิ้นสุดลงการทะเบียน" tabindex="9" style="max-width:100%">
+                        </div>
+                    </div>
+                </div>
+                <hr class="colorgraph">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 detailbox col-all-mtop col-all-center">
+                    <div class="col-xs-12 col-md-6 databox" ng-if="model.tournament.fix">
+                        <button type="submit" class="btn btn-primary col-xxs-mtop" ng-click="updatetournamentConfirm()">
+                            <i class="fa fa-floppy-o"></i> บันทึก
+                        </button>
+                    </div>
+                    <div class="col-xs-12 col-md-6 databox">
+                        <button type="button" class="btn btn-info col-xxs-mtop" onclick="location.href='@Url.Action("MenuView", "Admin")'">
+                            <i class="fa fa-arrow-right"></i> ย้อนกลับ
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            setDatePickerFromTo('TOUR_START_ON', 'TOUR_END_ON');
+            setDatePicker('EXPIRE_ON');
+        });
+        //$(document).ready(function () {
+        //    $(".fancyboxFull").fancybox(
+        //        {
+        //            width: '100%',
+        //            height: '100%'
+        //        });
+        //});
+        $(document).ready(function () {
+            $(".fancyboxSmall").fancybox(
+                {
+                    autoSize: false,
+                    width: '700px',
+                    height: '700px'
+                  
+                });
+        });    
+     
+    </script>
+

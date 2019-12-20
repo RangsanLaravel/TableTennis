@@ -1,0 +1,41 @@
+﻿@model IEnumerable<TOUR_REGISTER_VIEW>
+
+@if (Model != null)
+{
+
+    int? num_of_pay = (int?)TempData["NUM_OF_PLY"];
+    TempData.Keep();
+
+    var q = Model.GroupBy(x => x.TEAM_REF).Select(x => new { x.Key });
+    foreach (var item in q)
+    {
+        var s = (from x in Model where x.TEAM_REF == item.Key select x).OrderByDescending(x => x.POINT).ToList();
+        decimal totalPoint = 0;
+        <tr>
+            <td style="width:50px;">@s.FirstOrDefault().TEAM @s.FirstOrDefault().GROUP_NAME</td>
+            @for (var i = 0; i < num_of_pay; i++)
+            {
+                if (i < s.Count)
+                {
+                    <td>@s[i].ID</td>
+                    <td class="pyName">@s[i].FIRST_NAME @s[i].LAST_NAME</td>
+                    <td>@s[i].POINT</td>
+                    if (i < 3)
+                    {
+                        if (s[i].POINT != null)
+                        {
+                            totalPoint = totalPoint + (decimal)s[i].POINT;
+                        }
+                    }
+                }
+                else
+                {
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                }
+            }
+            <td>@totalPoint</td>
+        </tr>
+    }
+}

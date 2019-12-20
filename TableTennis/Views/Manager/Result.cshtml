@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "Result";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<div class="container" style="background-color:white;">
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-10 col-sm-offset-2 col-md-offset-1">
+            <h2>รายชื่อผู้จัดการทีม</h2>
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <input type="text" name="CODE" id="code" class="form-control" placeholder="รหัส" tabindex="1">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="text" name="NAME" id="name" class="form-control" placeholder="ชื่อ-นามสกุล" tabindex="1">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="text" name="TEAM" id="team" class="form-control" placeholder="ทีม" tabindex="1">
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <button type="button" class="btn btn-primary" id="srManeger"> ค้นหา</button>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <table id="tbManager" class="table">
+                        <thead>
+                            <tr>
+                                <th>ลำดับ</th>
+                                <th>รหัส</th>
+                                <th>ชื่อ-นามสกุล</th>
+                                <th>สังกัด</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#srManeger').on('click', function () {
+                getManager();
+
+            });
+            getManager();
+        });
+
+        function getManager() {
+            var sr = {
+                CODE: $('#code').val(),
+                NAME: $('#name').val(),
+                TEAM: $('#team').val()
+            }
+            $('#tbManager tbody tr').remove();
+
+            $.ajax({
+                        type:'POST',
+                        url: '@Url.Action("GridManager", "Manager")',
+                        data: { param: sr },
+                        success: function (response) {
+                            $('#tbManager tbody').append(response);
+                            $('#tbManager').DataTable();
+                        }
+                    });
+        }
+
+    </script>
+
+}

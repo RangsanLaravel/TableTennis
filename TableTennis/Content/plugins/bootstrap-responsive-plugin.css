@@ -1,0 +1,253 @@
+﻿/*!
+* CSS Extension Library
+* for N/A
+* 
+* Copyright © 2016 - N/A, Bangkok Life Assurance PCL
+* Author: TooN DinDarkDevil
+* Version: 2.0.0.0
+*/
+
+
+/* All media */
+.col-all-mtop {
+    margin-top: 10px;
+}
+
+.col-all-mbottom {
+    margin-bottom: 10px;
+}
+
+.col-all-center {
+    text-align: center;
+    -ms-align-content: center;
+    -webkit-align-content: center;
+    align-content: center;
+}
+
+.col-all-right {
+    text-align: end;
+    text-align: right;
+    -ms-align-content: flex-end;
+    -webkit-align-content: flex-end;
+    align-content: flex-end;
+}
+
+.col-all-left {
+    text-align: start;
+    text-align: left;
+    -ms-align-content: flex-start;
+    -webkit-align-content: flex-start;
+    align-content: flex-start;
+}
+
+/* Large desktops and laptops */
+@media (min-width: 1200px) {
+    .col-lg-mtop {
+        margin-top: 10px;
+    }
+
+    .col-lg-mbottom {
+        margin-bottom: 10px;
+    }
+
+    .col-lg-center {
+        text-align: center;
+        -ms-align-content: center;
+        -webkit-align-content: center;
+        align-content: center;
+    }
+
+    .col-lg-right {
+        text-align: end;
+        text-align: right;
+        -ms-align-content: flex-end;
+        -webkit-align-content: flex-end;
+        align-content: flex-end;
+    }
+
+    .col-lg-left {
+        text-align: start;
+        text-align: left;
+        -ms-align-content: flex-start;
+        -webkit-align-content: flex-start;
+        align-content: flex-start;
+    }
+}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .col-md-mtop {
+        margin-top: 10px;
+    }
+
+    .col-md-mbottom {
+        margin-bottom: 10px;
+    }
+
+    .col-md-center {
+        text-align: center;
+        -ms-align-content: center;
+        -webkit-align-content: center;
+        align-content: center;
+    }
+
+    .col-md-right {
+        text-align: end;
+        text-align: right;
+        -ms-align-content: flex-end;
+        -webkit-align-content: flex-end;
+        align-content: flex-end;
+    }
+
+    .col-md-left {
+        text-align: start;
+        text-align: left;
+        -ms-align-content: flex-start;
+        -webkit-align-content: flex-start;
+        align-content: flex-start;
+    }
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {
+    .col-sm-mtop {
+        margin-top: 10px;
+    }
+
+    .col-sm-mbottom {
+        margin-bottom: 10px;
+    }
+
+    .col-sm-center {
+        text-align: center;
+        -ms-align-content: center;
+        -webkit-align-content: center;
+        align-content: center;
+    }
+
+    .col-sm-right {
+        text-align: end;
+        text-align: right;
+        -ms-align-content: flex-end;
+        -webkit-align-content: flex-end;
+        align-content: flex-end;
+    }
+
+    .col-sm-left {
+        text-align: start;
+        text-align: left;
+        -ms-align-content: flex-start;
+        -webkit-align-content: flex-start;
+        align-content: flex-start;
+    }
+}
+
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+    .col-xs-mtop {
+        margin-top: 10px;
+    }
+
+    .col-xs-mbottom {
+        margin-bottom: 10px;
+    }
+
+    .col-xs-center {
+        text-align: center;
+        -ms-align-content: center;
+        -webkit-align-content: center;
+        align-content: center;
+    }
+
+    .col-xs-right {
+        text-align: end;
+        text-align: right;
+        -ms-align-content: flex-end;
+        -webkit-align-content: flex-end;
+        align-content: flex-end;
+    }
+
+    .col-xs-left {
+        text-align: start;
+        text-align: left;
+        -ms-align-content: flex-start;
+        -webkit-align-content: flex-start;
+        align-content: flex-start;
+    }
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+    .col-xxs-mtop {
+        margin-top: 10px;
+    }
+
+    .col-xxs-mbottom {
+        margin-bottom: 10px;
+    }
+
+    .col-xxs-center {
+        text-align: center;
+        -ms-align-content: center;
+        -webkit-align-content: center;
+        align-content: center;
+    }
+
+    .col-xxs-right {
+        text-align: end;
+        text-align: right;
+        -ms-align-content: flex-end;
+        -webkit-align-content: flex-end;
+        align-content: flex-end;
+    }
+
+    .col-xxs-left {
+        text-align: start;
+        text-align: left;
+        -ms-align-content: flex-start;
+        -webkit-align-content: flex-start;
+        align-content: flex-start;
+    }
+
+    .hidden-xxs {
+        display: none !important;
+    }
+}
+
+/* smallest >.< (min-width of container) */
+@media (max-width: 330px) {
+    .col-min-mtop {
+        margin-top: 10px;
+    }
+
+    .col-min-mbottom {
+        margin-bottom: 10px;
+    }
+
+    .col-min-center {
+        text-align: center;
+        -ms-align-content: center;
+        -webkit-align-content: center;
+        align-content: center;
+    }
+
+    .col-min-right {
+        text-align: end;
+        text-align: right;
+        -ms-align-content: flex-end;
+        -webkit-align-content: flex-end;
+        align-content: flex-end;
+    }
+
+    .col-min-left {
+        text-align: start;
+        text-align: left;
+        -ms-align-content: flex-start;
+        -webkit-align-content: flex-start;
+        align-content: flex-start;
+    }
+
+    .hidden-min {
+        display: none !important;
+    }
+}

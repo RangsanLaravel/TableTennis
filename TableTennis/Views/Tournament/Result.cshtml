@@ -1,0 +1,133 @@
+﻿@model REGISTER
+
+@{
+    ViewBag.Title = "Result";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    div.cat:hover {
+        background-color: whitesmoke;
+    }
+</style>
+
+@if (Model != null)
+{
+<div class="container" style="background-color:whitesmoke;border-radius:10px;">
+    <div class="row">
+        <div class="col-md-12" style="background-color:silver;">
+            <div class="row">
+                <div class="col-xs-12 col-sm-8 col-md-12 col-sm-offset-2 col-md-offset-1">
+                    <div class="row">
+                        @foreach (var item in Model._catMapTour)
+                        {
+                            <a href="#">
+                                <div class="col-md-2 btn btn-lg nav-cus-cat" onclick="rsPlay(@item.ID)" style="border-radius:0;background-color:@if(item.CAT_ID==Model.catMapTour.CAT_ID){ @("whitesmoke;") }else{@("silver;")}">
+                                    <div class="cat" style="border-radius:10px;" title="@(item.DESCRIPTION)">
+                                        <div align="center">
+                                            <form id="@("rs"+item.ID)" method="post" action="@Url.Action("Result","Tournament")">
+                                                <input type="hidden" name="tourId" value="@Model.tournament.ID" />
+                                                <input type="hidden" name="catId" value="@item.CAT_ID" />
+                                                <a href="#"  onclick="rsPlay(@item.ID)">@item.DESCRIPTION</a>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+    @if (Model.catMapTour.CAT_ID == 1)
+    {
+        @Html.Partial("ResultSingle", Model);
+        @section scripts{
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    getRegister();
+                    $('#srPlay').on('click', function () {
+                        getRegister();
+                    });
+                });
+
+                function getRegister() {
+                    
+                    $('.divLoading').show();
+                    $('#tbPlayer').DataTable().destroy();
+                    debugger
+                    var sr = {
+                        EVENT_ID: $('#even :selected').val(),
+                        NAME: $('#name').val(),
+                        TEAM: $('#team :selected').val(),
+                        ID: $('#play_id').val()
+                    };
+                    $('#tbPlayer tbody tr').remove();
+                    $.ajax({
+                        type:'POST',
+                        url: '@Url.Action("GridResult", "Tournament")',
+                        data: { tourId: $('#tour_id').val(), catId: $('#cat_id').val(), param: sr },
+                        success: function (response) {
+                            $('#tbPlayer tbody').append(response);
+                            $('#tbPlayer').DataTable();
+                            $('.divLoading').hide();
+                        }
+                    });
+                }
+
+                function rsPlay(e) {
+                    $('#rs' + e).submit();
+                }
+            </script>
+        }
+    }
+    else
+    {
+        @Html.Partial("ResultTeam", Model);
+        @section scripts{
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    getRegister();
+                    $('#srPlay').on('click', function () {
+                        getRegister();
+                    });
+
+                });
+
+                function getRegister() {
+                    $('.divLoading').show();
+                    $('#tbPlayer').DataTable().destroy();
+                    var sr = {
+                        EVENT_ID: $('#even :selected').val(),
+                        NAME: $('#name').val(),
+                        TEAM: $('#team :selected').val(),
+                        ID: $('#play_id').val()
+                    };
+                    $('#tbPlayer tbody tr').remove();
+                    $.ajax({
+                        type:'POST',
+                        url: '@Url.Action("GridTeamResult", "Tournament")',
+                        data: { tourId: $('#tour_id').val(), catId: $('#cat_id').val(), param: sr },
+                        success: function (response) {
+                            $('#tbPlayer tbody').append(response);
+                            $('#tbPlayer').DataTable({ "scrollX": true });
+                            $('.divLoading').hide();
+                        }
+                    });
+                }
+
+                function rsPlay(e) {
+                    $('#rs' + e).submit();
+                }
+            </script>
+        }
+    }
+    <br />
+    <br />
+    <br />
+</div>
+
+}
+
+

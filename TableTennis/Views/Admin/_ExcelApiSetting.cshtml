@@ -1,0 +1,45 @@
+﻿<div id="divForm" style="display:none">
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-3 col-md-offset-3 wapper radius subbox ">
+            <form role="form" method="post" action="@Url.Action("UpDateSetting","Admin")">
+                <h2 class="col-all-center"> ตั้งค่าการดึงเอกสาร </h2>
+                <hr class="colorgraph">
+                <div class="row detailbox">
+                    <div class="col-xs-12 col-sm-12 col-md-12 databox">
+                        <div class="form-group">
+                            <input type="text" name="CODE" id="CODE" class="form-control" placeholder="คอลัมภ์" tabindex="1" style="max-width:100%">
+                        </div>
+                    </div>                  
+                </div>
+                <div class="row detailbox">
+                    <div class="col-xs-12 col-sm-12 col-md-12 databox">
+                        <div class="form-group">
+                            <input type="text" name="EN_TOUR_NAME" id="EN_TOUR_NAME" class="form-control" placeholder="Limit Row" tabindex="2" style="max-width:100%">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row detailbox">
+                    <div class="col-xs-12 col-sm-12 col-md-12 databox">
+                        <div class="form-group">
+                            <input type="text" name="TH_TOUR_NAME" id="TH_TOUR_NAME" class="form-control" placeholder="URL google SpreadSheets" tabindex="3" style="max-width:100%">
+                        </div>
+                    </div>
+                </div>                               
+                <hr class="colorgraph">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 detailbox col-all-mtop col-all-center">
+                    <div class="col-xs-12 col-md-6 databox">
+                        <button type="submit" class="btn btn-primary col-xxs-mtop">
+                            <i class="fa fa-floppy-o"></i> บันทึก
+                        </button>
+                    </div>
+                    <div class="col-xs-12 col-md-6 databox">
+                        <button type="button" class="btn btn-info col-xxs-mtop" onclick="location.href='@Url.Action("ExcelApi", "Admin")'">
+                            <i class="fa fa-arrow-right"></i> ย้อนกลับ
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

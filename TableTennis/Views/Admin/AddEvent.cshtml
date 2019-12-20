@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "เพิ่มรายการแข่งขัน";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<style>
+    .btn-primary {
+        margin-right: 10px;
+    }
+
+    .container {
+        margin: 20px 0;
+    }
+</style>
+<script src="~/Scripts/admin/AddEvent.js"></script>
+<div id="main" class="container-fluid" ng-app="eventModule" ng-controller="eventController" hidden="hidden">
+    <div class="row mainbox" ng-init="initial('')">
+        @*<div class="row" ng-init="initial('')">*@
+        <input type="hidden" id="hdGetUrl" name="name" value="@Url.Action("GetUrlActionEvent", "Admin")" />
+        @*<div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-3 col-md-offset-3 wapper radius subbox ">*@
+        @*<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 wapper radius subbox ">*@
+        <div class="col-xs-12 col-sm-12 col-md-6 col-sm-offset-3 col-md-offset-3 wapper radius subbox ">
+            <h2 class="col-all-center">เพิ่มรายการแข่งขัน</h2>
+            <div class="row">
+                <h3 class="col-all-center"> {{model.tournament.series.EN_TOUR_NAME}}</h3>
+                <h3 class="col-all-center "> {{model.tournament.series.TH_TOUR_NAME}}</h3>
+                <h3 class="col-all-center">{{model.tournament.series.DESCRIPTION}}</h3>
+                <h3 class="col-all-center"> {{model.tournament.series.TOUR_ADDRESS}}</h3>
+                <h3 class="col-all-center"> {{model.tournament.series.TOUR_POINT}}</h3>
+            </div>
+            <hr class="colorgraph">
+            <div class="row detailbox">
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <select class="select" ng-model="model.tournament.val" ng-change="showtournament()"  >
+                        <option value="" disabled="disabled" hidden="hidden"> - กรุณาเลือกทัวร์นาเม้น -</option>                        
+                        <option value="{{_tournament.ID}}" ng-repeat="_tournament in master.tournament">{{_tournament.CODE}}</option>
+                    </select>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <select class="select" ng-model="model.category.val" ng-change="catechange()">
+                        <option value="" disabled="disabled" hidden="hidden"> - ประเภทเดี่ยว - </option>
+                        <option value="{{_category.ID}}" ng-repeat="_category in master.category">{{_category.DESCRIPTION}}</option>
+                    </select>
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4 databox">
+                    <input type="text" ng-model="model.numofply.val" class="form-control" placeholder="จำนวนนักกีฬา" @*ng-enter="search()" ng-model="model.policymodel.REF_ID.val" ng-disabled="model.policymodel.REF_ID.fix" ng-class="{'require': (model.policymodel.REF_ID.val.length == 0 && !model.isvalid) , 'ready' : (model.policymodel.REF_ID.val.length != 0)}"*@ />
+                    @*<input type="button" ng-click="session()"/>*@
+                </div>
+
+                @*<div class="col-xs-12 col-sm-4 col-md-4  databox">
+                        <div class="col-xs-12 col-sm-4 col-md-4 ">
+                            <button type="button" class="btn btn-warning btn-xs" ng-if="model.tournament.fix" ng-click="editTour('@Url.Action("Index","Admin")')"> <i class="fa fa-pencil-square-o"></i> แก้ไข </button>
+                        </div>
+                        <div class="col-xs-12 col-sm-4 col-md-4 "></div>
+                        <div class="col-xs-12 col-sm-4 col-md-4">
+                            <button type="button" class="btn btn-danger btn-xs" ng-if="model.tournament.fix" ng-click="removeTour()"> <i class="fa fa-eraser"></i> ลบ </button>
+                        </div>
+                    </div>*@
+            </div>
+            <br />
+            @Html.Partial("~/Views/Admin/_AddEventTable.cshtml")
+        </div>
+    </div>
+</div>
+

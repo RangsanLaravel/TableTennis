@@ -1,0 +1,143 @@
+﻿@model REGISTER
+@{
+    /**/
+
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .colorgraph {
+        height: 5px;
+        border-top: 0;
+        background: #c4e17f;
+        border-radius: 5px;
+        background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+        background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+    }
+
+    th {
+        text-align: center;
+    }
+
+    td {
+        text-align: center;
+    }
+
+    div.cat:hover {
+        background-color: whitesmoke;
+    }
+</style>
+
+@if (Model == null)
+{
+    <h1>Error</h1>
+}
+else
+{
+    <div class="container" style="background-color:whitesmoke;border-radius:10px;">        
+        <div class="row">
+            <div class="col-md-12" style="background-color:silver;">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-8 col-md-12 col-sm-offset-2 col-md-offset-1">
+                        <div class="row">
+                            @foreach (var item in Model._catMapTour)
+                            {      
+                            <a href="#">
+                                <div class="col-md-2 btn btn-lg nav-cus-cat" onclick="register(@item.ID)" style="border-radius:0;background-color:@if(item.CAT_ID==Model.catMapTour.CAT_ID){ @("whitesmoke;") }else{@("silver;")}">
+                                    <div class="cat" style="border-radius:10px;" title="@(item.DESCRIPTION)">
+                                        <div  align="center">
+                                            <form id="@item.ID" method="post" action="@Url.Action("Register","Tournament")">
+                                                <input type="hidden" name="tourId" value="@item.TOUR_ID" />
+                                                <input type="hidden" name="id" value="@Model.manager.ID" />
+                                                <input type="hidden" name="catId" value="@item.CAT_ID" />
+                                                <a onclick="register(@item.ID)">@item.DESCRIPTION</a>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>                                                                                             
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-md-12 col-sm-offset-2 col-md-offset-1">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>@Model.tournament.TH_TOUR_NAME</h2>
+                        <h2>@Model.tournament.EN_TOUR_NAME</h2>
+                        <h4>@Model.tournament.DESCRIPTION</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-md-offset-1">
+                        <div class="row">
+                            <div class="col-md-2" style="text-align:right"><label>ข้าพเจ้า</label></div>
+                            <div class="col-md-10">@Model.manager.FIRST_NAME @Model.manager.LAST_NAME</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2" style="text-align:right"><label>ผู้แทนทีม</label></div>
+                            <div class="col-md-10">@Model.manager.TEAM</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2" style="text-align:right"><label>เบอร์โทรศัพท์</label></div>
+                            <div class="col-md-10">@Model.manager.PHONE</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2" style="text-align:right"><label>Email ใช้ในการสมัคร</label></div>
+                            <div class="col-md-10">@Model.manager.EMAIL</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+
+                        @if (!string.IsNullOrEmpty(Model.tournament.TH_TOUR_NAME))
+                        {
+                            <h4>ขอสมัครเข้าร่วมการแข่งขันเทเบิลเทนนิสราการ @Model.tournament.TH_TOUR_NAME ดังนี้ </h4>
+                        }
+                        else
+                        {
+                            <h4>ขอสมัครเข้าร่วมการแข่งขันเทเบิลเทนนิสราการ @Model.tournament.EN_TOUR_NAME ดังนี้ </h4>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        @if (Model.catMapTour.CAT_ID == 1)
+        {
+        @Html.Partial("Single", Model);
+        @section scripts{
+
+            <script src="~/Scripts/Touranment/register-single.js"></script>
+            <script type="text/javascript">
+                function register(e) {
+                    $('#' + e).submit();
+                }
+            </script>
+        }
+        }
+        else
+        {
+        @Html.Partial("Team", Model);
+        @section scripts{
+            <script src="~/Scripts/Touranment/register-team.js"></script>
+            <script type="text/javascript">
+                function register(e) {
+                    $('#' + e).submit();
+                }
+            </script>
+        }
+        }
+        <br />
+        <br />
+    </div>
+    <br />
+}
+
+

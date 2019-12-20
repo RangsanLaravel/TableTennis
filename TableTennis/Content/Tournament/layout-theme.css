@@ -1,0 +1,11 @@
+﻿.nav-cus{
+    border-left:solid 1px;
+    border-right:solid 1px;
+}
+
+.nav-cus-cat {
+    border-left: solid 1px;
+    border-right: solid 1px;
+    border-left-color:white;
+    border-right-color:white;
+}

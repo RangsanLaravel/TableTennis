@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+
+
+    <!-- standard stylesheet -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="~/Content/font-awesome.css" rel="stylesheet" />
+
+    <!-- plugins stylesheet -->
+    <link href="~/Content/plugins/bootstrap-responsive-plugin.min.css" rel="stylesheet" />
+    <link href="~/Content/plugins/responsive-nav.css" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery-3.1.1.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/angular.js"></script>
+    <script src="~/Scripts/ui-bootstrap-tpls-0.9.0.js"></script>
+
+    <script src="~/Scripts/jquery-ui-1.12.1/jquery-ui.js"></script>
+    <link href="~/Scripts/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet" />
+
+    <!-- plugins scripts -->
+    <script src="~/Scripts/plugins/responsive-nav.min.js"></script>
+
+    <link href="~/Content/datepicker/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="~/Content/datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <link href="~/Content/datepicker/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="~/Content/plugins/style.css" rel="stylesheet" />
+
+    <script src="~/Content/datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="~/Content/datepicker/bootstrap-datepicker-thai.js"></script>
+    <script src="~/Content/datepicker/locales/bootstrap-datepicker.th.js"></script>
+
+    <!-- SweetAlert -->
+    @*<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>*@
+    <script src="~/Scripts/dirPagination.js"></script>
+    <script src="~/Scripts/system/sweetalert.min.js"></script>
+
+    <!--fancy box-->
+    <link href="~/Content/fancybox/jquery.fancybox.css" rel="stylesheet" />
+    <script src="~/Content/fancybox/jquery.fancybox.js"></script>
+
+    @Html.Partial("BaseLayout")
+</head>
+<body>
+
+    <script>
+        $(document).ready(function () {
+            $('#main').show();
+        });
+    </script>
+
+    @RenderBody()
+
+    @Html.Partial("~/Views/Shared/_Loading.cshtml")
+
+    <script src="~/Scripts/system/Common.js"></script>
+
+
+</body>
+</html>
